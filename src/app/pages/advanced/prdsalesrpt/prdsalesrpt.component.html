@@ -1,0 +1,98 @@
+<div class="cui__utils__heading">
+    <strong>Product Wise Sales</strong>
+</div>
+
+<div class="card">
+    <br>
+    <div class="row">
+        <div class="col-xs-4 col-md-2">
+            <div class="mb-6 px-3 py-4 ">
+                <nz-range-picker [(ngModel)]="date" (ngModelChange)="onChange($event)" style="width: 200px;">
+                    <ng-template #renderExtraFooter>
+                        <span class="ant-calendar-footer-extra" *ngIf="currentDate">
+                            Current Date: {{ formatDate(currentDate) }}
+                        </span>
+                    </ng-template>
+                </nz-range-picker>
+
+            </div>
+        </div>
+
+        <div class="col-xs-4 col-md-2">
+            <div class="mb-6 px-3 py-4 ">
+                <nz-select style="width: 200px;" nzShowSearch nzAllowClear nzPlaceHolder="Select Company"
+                    [(ngModel)]="selectedValue">
+                    <nz-option *ngFor="let row of getcomstore" [nzLabel]="row.Name"
+                        [nzValue]="row.CompanyId"></nz-option>
+                </nz-select>
+            </div>
+        </div>
+
+        <!-- <div class="col-xs-4 col-md-2">
+            <div class="mb-4 px-3 py-2 "> -->
+        <!-- <nz-select style="width: 200px;" nzShowSearch nzAllowClear nzPlaceHolder="Select Stores"
+                    [(ngModel)]="selectedValue2">
+                    <nz-option *ngFor="let row of getcomstore2" [nzLabel]="row.Name" [nzValue]="row.Id"></nz-option>
+                </nz-select> -->
+        <!-- </div>
+        </div> -->
+
+        <div class="col-xs-6 col-md-4">
+            <div class="mb-6 px-3 py-4 ">
+                <button class="btn btn-success" (click)="prdgrpdata_values()">
+                    SUBMIT
+                </button>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button class="btn btn-danger" [disabled]="!isUploadEnabled()" (click)="exportToCSV()">
+                    EXPORT
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <section class="hk-sec-wrapper">
+        <div class="table-wrap" style="margin: 10px;">
+            <div class="table-responsive" style="overflow: auto; height: 600px;">
+                <table class="table mb-0 table-sm">
+
+                    <thead class="fixed-head">
+                        <tr>
+                            <th style="text-align: left;" scope="col">Product</th>
+                            <!-- <th style="text-align: center;" scope="col">Category</th> -->
+                            <th style="text-align: center;" scope="col">Amount</th>
+                            <th style="text-align: center;" scope="col">CGST %</th>
+                            <th style="text-align: center;" scope="col">SGST % </th>
+                            <th style="text-align: center;" scope="col">CGST</th>
+                            <th style="text-align: center;" scope="col">SGST</th>
+                            <th style="text-align: center;" scope="col">Total amount</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr *ngFor="let row of prods">
+                            <td style="text-align: left;">{{row.Product}}</td>
+                            <!-- <td style="text-align: center;">{{row.Category}}</td> -->
+                            <td style="text-align: center;">{{row.pr}}</td>
+                            <td style="text-align: center;">{{row.CGST}}</td>
+                            <td style="text-align: center;">{{row.SGST}}</td>
+                            <td style="text-align: center;">{{row.CAmt}}</td>
+                            <td style="text-align: center;">{{row.SAmt}}</td>
+                            <td style="text-align: center;">{{row.ta}}</td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+            <div class="justify-content-between p-2">
+              <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize">
+              </ngb-pagination>
+
+              <select class="custom-select" style="width: auto" [(ngModel)]="pageSize">
+                <option [ngValue]="5">5 items per page</option>
+                <option [ngValue]="10">10 items per page</option>
+                <option [ngValue]="25">25 items per page</option>
+              </select>
+            </div>
+        </div>
+    </section>
+</div>

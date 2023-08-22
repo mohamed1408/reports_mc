@@ -1,0 +1,120 @@
+<div class="cui__utils__heading">
+    <strong>FB Cakes GST</strong>
+</div>
+
+<div class="card">
+    <br>
+    <div class="row">
+        <div class="col-xs-4 col-md-2">
+            <div class="mb-4 px-3 py-2 ">
+                <nz-month-picker style="width: 200px" [(ngModel)]="date"
+                    (ngModelChange)="onChange($event)"></nz-month-picker>
+            </div>
+        </div>
+
+        <!-- <div class="col-xs-4 col-md-2" *ngIf="selectGST == '6521'">
+            <div class="mb-4 px-3 py-2">
+                <nz-select style="width: 200px;" nzShowSearch nzAllowClear nzPlaceHolder="Select GST No"
+                    [(ngModel)]="selectedValue">
+                    <nz-option nzLabel="33APUPK5773P1ZW" nzValue="33APUPK5773P1ZW"></nz-option>
+                    <nz-option nzLabel="33AODPM8622B1ZC" nzValue="33AODPM8622B1ZC"></nz-option>
+                    <nz-option nzLabel="33CZXPM4328M1ZM" nzValue="33CZXPM4328M1ZM"></nz-option>
+                    <nz-option nzLabel="33AMBPD3114B2Z5" nzValue="33AMBPD3114B2Z5"></nz-option>
+                    <nz-option nzLabel="33AAECF5895R1ZS" nzValue="33AAECF5895R1ZS"></nz-option>
+                    <nz-option nzLabel="33ETSPM1889J1ZV" nzValue="33ETSPM1889J1ZV"></nz-option>
+                    <nz-option nzLabel="36BQSPM9610B1ZO" nzValue="36BQSPM9610B1ZO"></nz-option>
+                    <nz-option nzLabel="29BKEPV9455R1ZS" nzValue="29BKEPV9455R1ZS"></nz-option>
+                    <nz-option nzLabel="33IWIPS2183C1ZF" nzValue="33IWIPS2183C1ZF"></nz-option>
+                </nz-select>
+            </div>
+        </div> -->
+
+
+
+        <div class="col-xs-4 col-md-2">
+            <div class="mb-4 px-3 py-2 ">
+                <nz-select style="width: 200px;" nzShowSearch nzPlaceHolder="Select Category" nzMode="multiple"
+                    [(ngModel)]="selectedValue2" (ngModelChange)="onSelectedValueChange()">
+                    <nz-option nzLabel="Others" nzValue="Others"></nz-option>
+                    <nz-option nzLabel="Sweets" nzValue="Sweets"></nz-option>
+                    <nz-option nzLabel="Cakes" nzValue="Cakes"></nz-option>
+                    <nz-option nzLabel="Accessories" nzValue="Accessories"></nz-option>
+                    <nz-option nzLabel="Bakery" nzValue="Bakery"></nz-option>
+                </nz-select>
+            </div>
+        </div>
+
+        <div class="col-xs-4 col-md-2">
+            <div class="mb-4 px-3 py-2 ">
+                <nz-select style="width: 200px;" nzShowSearch nzPlaceHolder="Select Tax" nzMode="multiple"
+                    [(ngModel)]="selectedValue3" (ngModelChange)="onSelectedValueChange2()">
+                    <nz-option nzLabel="Zero %" nzValue="0"></nz-option>
+                    <nz-option nzLabel="5 %" nzValue="5"></nz-option>
+                    <nz-option nzLabel="12 %" nzValue="12"></nz-option>
+                    <nz-option nzLabel="18 %" nzValue="18"></nz-option>
+                </nz-select>
+            </div>
+        </div>
+
+        <div class="col-xs-6 col-md-4">
+            <div class="mb-4 px-3 py-2 ">
+                <button class="btn btn-success" [disabled]="!isSubmitEnabled()" (click)="getrept()">
+                    SUBMIT
+                </button>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button class="btn btn-danger" [disabled]="!isExportEnabled()" (click)="exportToCSV()">
+                    EXPORT
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <section class="hk-sec-wrapper">
+        <div class="table-wrap" style="margin: 10px;">
+            <div class="table-responsive" style="overflow: auto; height: 600px;">
+                <table class="table mb-0 table-sm">
+
+                    <thead class="fixed-head">
+                        <tr>
+                            <th scope="col">Product Group</th>
+                            <th style="text-align: left;" scope="col">Amount</th>
+                            <!-- <th style="text-align: left;" scope="col">Tax</th> -->
+                            <th scope="col">CGst</th>
+                            <th scope="col">CGst Amount</th>
+                            <th scope="col">SGst </th>
+                            <th scope="col">SGst Amount</th>
+                            <th scope="col">Tax Amount</th>
+                            <th scope="col">Tax Percent</th>
+                            <th scope="col">Total Amount</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr *ngFor="let row of storereport">
+                            <td style="text-align: left;">{{ row.product }}</td>
+                            <td style="text-align: left;">{{row.amount}}</td>
+                            <td style="text-align: left;">{{row.CGST}}</td>
+                            <td style="text-align: left;">{{row.CGSTAmt }}</td>
+                            <td style="text-align: left;">{{row.SGST}}</td>
+                            <td style="text-align: left;">{{row.SGSTAmt }}</td>
+                            <td style="text-align: left;">{{row.TaxAmount }}</td>
+                            <td style="text-align: left;">{{row.taxpercent}}</td>
+                            <td style="text-align: left;">{{row.TotalAmount }}</td>
+                        </tr>
+                        <tr *ngIf="!storereport || storereport.length == 0">
+                          <td colspan="100%" class="text-center">No Records Found</td>
+                        </tr>
+                    </tbody>
+                    <!-- hihi -->
+                </table>
+            </div>
+        </div>
+    </section>
+</div>
+
+<div *ngIf="loading" class="lds-ring">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+</div>

@@ -1,0 +1,77 @@
+<div *ngIf="!isloggedin" class="card boxContainer" style="background-color: #fefefe; border-radius: 20px;">
+  <div>
+    <div style="text-align: center;">
+      <strong style="font-size: 30px; color: #9d6cd9;">USER &nbsp;LOGIN</strong>
+    </div>
+  </div>
+  <div style="text-align: center; font-size: xx-large;" class="font-size-24 mb-3">
+    <strong><span style="font-size: 150px; color: linear-gradient(to bottom, #2efe3d 0%, #31a74d 100%);"
+        class="fa fa-user"></span></strong>
+  </div>
+  <form nz-form [nzLayout]="'vertical'" [formGroup]="form" (ngSubmit)="submitForm()" role="form">
+    <nz-form-item style="margin-left: 20px; margin-right: 20px; ">
+      <nz-form-control nzErrorTip="Please input your email!">
+        <nz-input-group style="font-size: 20px; align-items: center; background-color: #e8f0fe; border-radius: 10px;
+        padding: 5px; padding-left: 10px;
+        border: 1px solid #ccc;" nzPrefixIcon="mail">
+          <input style="height: 40px; margin-left: 10px; background-color: #e8f0fe; border-color: white; " type="text"
+            nz-input formControlName="EmailId" nzSize="large" placeholder="Type your email" class="" />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item style="margin-left: 20px; margin-right: 20px;">
+      <nz-form-control nzErrorTip="Please input your Password!">
+        <nz-input-group style="font-size: 20px; align-items: center; background-color: #e8f0fe; border-color: white; border-radius: 10px;
+        padding: 5px; padding-left: 10px;
+        border: 1px solid #ccc;" nzPrefixIcon="lock">
+          <input style="height: 40px; margin-left: 10px;background-color: #e8f0fe;" type="password" nz-input
+            nzSize="large" formControlName="Password" placeholder="Type your password" class="no-border-input" />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <div style="float: right; margin-right: 20px;">
+      <a routerLink="/auth/forgot-password" class="kit__utils__link font-size-16">
+        Forgot password?
+      </a>
+    </div>
+    <br><br>
+    <nz-form-item style="align-items: center;">
+      <nz-form-control style="width: 200px;">
+        <button nz-button [nzSize]="'large'" nzShape="round" [nzLoading]="loading" class="text-center w-100"
+          style="background: linear-gradient(to bottom, #2efe3d 0%, #31a74d 100%);">
+          <strong style="color: white;">Log In</strong>
+        </button>
+
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+  <div class="text-center pt-2 mb-auto">
+    <span class="mr-2">Don't have an account?</span>
+    <a routerLink="/auth/register" class="kit__utils__link font-size-16">
+      Sign up
+    </a>
+  </div>
+</div>
+<div *ngIf="isloggedin" class="card boxContainer">
+  <div class="text-dark font-size-24 mb-3">
+    <strong>Select store</strong>
+  </div>
+  <div class="mb-4">
+    <nz-list [nzDataSource]="stores" [nzRenderItem]="item" [nzItemLayout]="'horizontal'" [nzLoading]="loading">
+      <ng-template #item let-item>
+        <nz-list-item>
+          <nz-list-item-meta [nzTitle]="nzTitle" nzDescription="{{item.address}}">
+            <ng-template #nzTitle>
+              <span class="ant-typography"><code>*</code></span>
+              <a href="javascript:void(0);" (click)="getusers(item.id)">{{ item.name }}</a>
+            </ng-template>
+          </nz-list-item-meta>
+        </nz-list-item>
+      </ng-template>
+    </nz-list>
+  </div>
+  <a href="javascript:void(0);" (click)="isloggedin = false" class="kit__utils__link font-size-16">
+    Login with another account
+  </a>
+</div>

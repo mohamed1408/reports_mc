@@ -1,0 +1,71 @@
+@import 'src/app/components/mixins.scss';
+
+.topbar {
+  padding: 0 rem(30);
+  min-height: 64px;
+  height: 64px;
+  border-bottom: 1px solid $border;
+  color: $text;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+
+  @media (max-width: $sm-max-width) {
+    padding: 0 rem(16);
+  }
+}
+
+// dark theme
+:host-context([data-kit-theme='dark']) {
+  .topbar {
+    background: $dark-gray-6;
+    color: $dark-gray-1;
+    border-bottom: 1px solid $dark-gray-4;
+  }
+}
+
+
+//HYPERTECH
+::ng-deep .popover-body {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+.settings {
+  position: absolute;
+  bottom: 0;
+}
+
+
+.checkbox-select {
+  position: relative;
+  right: 50px;
+}
+
+.options {
+  position: absolute;
+  left: 0;
+  /* max-height: 250px; */
+  overflow: auto;
+}
+
+.option {
+  background: white;
+  cursor: pointer;
+}
+
+.option label {
+  margin: 0;
+  cursor: pointer;
+}
+
+.option:hover {
+  background: #348ff1;
+}
+
+.option:hover label {
+  color: white;
+}

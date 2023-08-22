@@ -1,0 +1,11 @@
+<!-- <div>
+    <nz-select style="width: 200px;" [nzMaxTagCount]="2" nzMode="multiple" nzPlaceHolder="Select Atleast One..."
+        *ngIf="!multicompanies" [(ngModel)]="selected_companies" (ngModelChange)="setCompanyId()">
+        
+        <nz-option *ngFor="let company of companies" [nzLabel]="company.accountName" [nzValue]="company.companyId">
+            {{ company.accountName }}
+        </nz-option>
+    </nz-select>
+</div> -->
+
+<p style="font-weight: bold;">GST NO : {{ getGSTNumber() }}</p>

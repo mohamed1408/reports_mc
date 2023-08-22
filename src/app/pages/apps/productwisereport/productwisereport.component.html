@@ -1,0 +1,182 @@
+<div class="card" style="width: 100%;">
+    <div class="card-body">
+        <nz-tabset>
+            <nz-tab nzTitle="Live Orders">
+                <p style="font-size: 20px;">Stores</p>
+                <div nz-row>
+                    <div nz-col nzSpan="4" [nzXs]="24" [nzSm]="12" [nzMd]="6" [nzLg]="6">
+                        <nz-select style="width: 200px;" [nzMaxTagCount]="1" nzShowSearch nzAllowClear
+                            nzPlaceHolder="Select Store" [(ngModel)]="storeId" nzMode="multiple">
+                            <nz-option (selected)='selectEvent($event)' *ngFor="let option of storeOptions"
+                                [nzLabel]="option.label" [nzValue]="option.value"></nz-option>
+                        </nz-select>
+                    </div>
+                    <div nz-col nzSpan="20" [nzXs]="24" [nzSm]="12" [nzMd]="6" [nzLg]="6">
+                        <!-- <label nz-checkbox
+                            [(ngModel)]="datatype">Display Option</label> -->
+                    </div>
+                </div>
+
+
+                <br>
+                <div nz-row>
+                    <div nz-col nzSpan="6" [nzXs]="24" [nzSm]="12" [nzMd]="6" [nzLg]="6">
+                        <p style="font-size: 20px;">Search</p>
+                        <nz-range-picker [nzRanges]="ranges" ngModel
+                            (ngModelChange)="onChange($event)"></nz-range-picker>
+                    </div>
+                    <div nz-col nzSpan="6" [nzXs]="24" [nzSm]="12" [nzMd]="6" [nzLg]="6">
+                        <!-- <p style="font-size: 20px;">Category</p>
+                        <nz-select style="width: 250px;" nzShowSearch nzAllowClear nzPlaceHolder="Select Category"
+                            [(ngModel)]="categoryId">
+                            <nz-option nzLabel="All" nzValue="0" selected></nz-option>
+                            <nz-option *ngFor="let item of categ" nzLabel="{{ item.description }}"
+                                nzValue="{{ item.id }}"></nz-option>
+                        </nz-select> -->
+                        <p style="font-size: 20px;">Source</p>
+                        <nz-select style="width: 200px;" [(ngModel)]="sourceId" nzAllowClear
+                            nzPlaceHolder="Choose Atleast One..">
+                            <nz-option nzValue="0" nzLabel="All"></nz-option>
+                            <nz-option nzValue="1" nzLabel="POS"></nz-option>
+                            <nz-option nzValue="2" nzLabel="Swiggy"></nz-option>
+                            <nz-option nzValue="3" nzLabel="Zomato"></nz-option>
+                            <nz-option nzValue="4" nzLabel="Food Panda"></nz-option>
+                        </nz-select>
+                    </div>
+                    <div nz-col nzSpan="6" [nzXs]="24" [nzSm]="12" [nzMd]="6" [nzLg]="6">
+                        <!-- <p style="font-size: 20px;">Source</p> -->
+                        <!-- <nz-select style="width: 200px;" [(ngModel)]="sourceId" nzAllowClear
+                            nzPlaceHolder="Choose Atleast One.."> -->
+                        <!-- <nz-option nzValue="0" nzLabel="All"></nz-option> -->
+                        <!-- <nz-option nzValue="1" nzLabel="POS"></nz-option>
+                            <nz-option nzValue="2" nzLabel="Swiggy"></nz-option>
+                            <nz-option nzValue="3" nzLabel="Zomato"></nz-option>
+                            <nz-option nzValue="4" nzLabel="Food Panda"></nz-option>
+                        </nz-select> -->
+                        <div style="margin-top: 40px;">
+                            <button style="width: 200px;" type="button" class="btn btn-primary"
+                                (click)="Submit()">Submit</button>
+                        </div>
+
+                    </div>
+                    <div nz-col nzSpan="6" [nzXs]="24" [nzSm]="12" [nzMd]="6" [nzLg]="6">
+                        <!-- <p style="font-size: 20px;">Sale Product Group</p>
+                        <nz-select style="width: 250px;" nzShowSearch nzAllowClear nzPlaceHolder="Select a person"
+                            [(ngModel)]="tagId">
+                            <nz-option nzLabel="All" nzValue="0"></nz-option>
+                            <nz-option *ngFor="let item of saleProducts" nzLabel="{{ item.name }}"
+                                nzValue="{{ item.Id }}"></nz-option>
+                        </nz-select> -->
+
+                        <div style="margin-top: 40px;">
+                            <button style="width: 200px;" type="button" class="btn btn-success"
+                                (click)="ExportTOExcel()">Export</button>
+                        </div>
+                    </div>
+                </div>
+
+                <br>
+                <br>
+                <!-- <div nz-row>
+                    <div nz-col nzSpan="24" style="display: flex; justify-content: center; align-items: center;">
+                        <button style="width: 200px;" type="button" class="btn btn-primary"
+                            (click)="Submit()">Submit</button> 
+                    </div>
+                </div>
+                <br>
+                <div nz-row>
+                    <div nz-col nzSpan="24" style="display: flex; justify-content: center; align-items: center;">
+                         <button style="width: 200px;" type="button" class="btn btn-success"
+                            (click)="ExportTOExcel()">Export</button>
+                    </div>
+                </div>
+
+                <br> -->
+                <div nz-row>
+                    <div nz-col nzSpan="24">
+                        <input style="width: 100%;" nz-input placeholder="Search" [(ngModel)]=" term"
+                            (input)="calculate()" />
+                    </div>
+
+                    <div style="float: right; margin-top: 20px;">
+                        <strong style="color: green;">Total Sales: </strong> {{ totalSalesSum | number:'1.0-0' }}
+                        <br>
+                        <strong style="color: rgb(80, 54, 54);">Quantity: </strong> {{ qtySum | number:'1.0-0' }}
+                        <br>
+                        <strong style="color: rgb(80, 54, 54);">Free Qty: </strong> {{ freeqtySum | number:'1.0-0' }}
+                        <br>
+                        <strong style="color:#653fb5">Total Qty: </strong> {{ totalqtySum | number:'1.0-0'
+                        }}
+                        <br>
+                    </div>
+                </div>
+
+                <div nz-row>
+                    <div nz-col nzSpan="24">
+                        <section class="hk-sec-wrapper">
+                            <div class="table-wrap">
+                                <div class="table-responsive" style="overflow: auto;">
+                                    <table class="table mb-0 table-sm" #exportTable>
+                                        <thead class="fixed-head">
+                                            <tr>
+                                                <th (click)="sortData('productName')">Product Name</th>
+                                                <th (click)="sortData('orderQuantity')">Quantity</th>
+                                                <th (click)="sortData('freeQty')">Free Qty</th>
+                                                <th (click)="sortData('totalQty')">Total Qty</th>
+                                                <th (click)="sortData('price')">Price</th>
+                                                <th (click)="sortData('totalSales')">Amount</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <tr *ngFor="let item of productsorders | filter: term ">
+                                                <td>{{ item.productName }}</td>
+                                                <td>{{ item.orderQuantity }}</td>
+                                                <td>{{ item.freeQty }}</td>
+                                                <td>{{ item.totalQty }}</td>
+                                                <td>{{ item.price }}</td>
+                                                <td>{{ item.totalSales | number:'1.0-0' }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td><strong>Total Sales</strong></td>
+                                                <td class="font-14"><strong>&#8377;{{ totalSalesSum | number:'1.0-0'
+                                                        }}</strong></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td><strong>Total Qty</strong></td>
+                                                <td class="font-14"><strong>&#8377;{{ totalqtySum | number:'1.0-0'
+                                                        }}</strong></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </nz-tab>
+
+            <nz-tab nzTitle="Local Orders">
+                <div nz-row>
+                    <div nz-col nzSpan="6" [nzXs]="24" [nzSm]="12" [nzMd]="6" [nzLg]="6">Coming Soon...</div>
+                    <div nz-col nzSpan="6" [nzXs]="24" [nzSm]="12" [nzMd]="6" [nzLg]="6">Coming Soon...</div>
+                    <div nz-col nzSpan="6" [nzXs]="24" [nzSm]="12" [nzMd]="6" [nzLg]="6">Coming Soon...</div>
+                    <div nz-col nzSpan="6" [nzXs]="24" [nzSm]="12" [nzMd]="6" [nzLg]="6">Coming Soon...</div>
+                </div>
+            </nz-tab>
+        </nz-tabset>
+    </div>
+</div>
+
+
+<div style="display: none;" id="preloader">
+    <div id="loader"></div>
+</div>

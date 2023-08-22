@@ -1,0 +1,207 @@
+<div class="card" style="width: 100%">
+    <div class="card-body">
+        <div nz-row>
+            <div nz-col nzSpan="12" [nzXs]="24" [nzSm]="12" [nzMd]="6" [nzLg]="6">
+                <p style="font-size: 20px;">Location</p>
+                <nz-select style="width: 250px;" nzShowSearch nzAllowClear nzPlaceHolder="Select a Store"
+                    [(ngModel)]="storeId">
+                    <nz-option (selected)='selectEvent($event)' *ngFor="let option of storeOptions"
+                        [nzLabel]="option.label" [nzValue]="option.value"></nz-option>
+                </nz-select>
+            </div>
+            <div nz-col nzSpan="12" [nzXs]="24" [nzSm]="12" [nzMd]="6" [nzLg]="6">
+                <p style="font-size: 20px;">Date</p>
+                <nz-range-picker style="width: 250px;" [nzRanges]="ranges" ngModel
+                    (ngModelChange)="onChange($event)"></nz-range-picker>
+            </div>
+            <div nz-col nzSpan="12" [nzXs]="24" [nzSm]="12" [nzMd]="6" [nzLg]="6">
+                <p style="font-size: 20px;">Source</p>
+                <nz-select style="width: 250px;" [(ngModel)]="sourceId" nzAllowClear
+                    nzPlaceHolder="Choose Atleast One..">
+                    <nz-option nzValue="0" nzLabel="All"></nz-option>
+                    <nz-option nzValue="1" nzLabel="POS"></nz-option>
+                    <nz-option nzValue="2" nzLabel="Swiggy"></nz-option>
+                    <nz-option nzValue="3" nzLabel="Zomato"></nz-option>
+                    <nz-option nzValue="4" nzLabel="Food Panda"></nz-option>
+                </nz-select>
+            </div>
+            <div nz-col nzSpan="12" [nzXs]="24" [nzSm]="12" [nzMd]="6" [nzLg]="6">
+                <div style="margin-top: 40px;">
+                    <button style="width: 100px; border-radius: 5px;" type="button" (click)="Submit()"
+                        class="btn btn-success">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card" style="width: 100%;">
+    <div class="card-body">
+        <input style="width: 100%; height: 40px; font-size: 15px;" nz-input placeholder="Search Report..."
+            [(ngModel)]="value" [(ngModel)]="term" (input)="calculate()" />
+        <br><br>
+        <div class="float-right">
+            <strong>Total Sales: </strong>&nbsp;{{TotalSales | number: ".2"}} <br>
+            <strong style="color: green;">Total Payments: </strong>&nbsp;{{TotalPayments | number: ".2"}} <br>
+        </div>
+        <br><br>
+        <section class="hk-sec-wrapper">
+            <div class="table-wrap">
+                <div class="table-responsive" style="overflow: auto;">
+                    <table class="table mb-0 table-sm">
+                        <thead class="fixed-head">
+                            <tr>
+                                <th (click)="sortsettings('invoiceNo')">Invoice No
+                                </th>
+                                <th (click)="sortsettings('orderedDate')">Date
+                                </th>
+                                <th (click)="sortsettings('store')">Store
+                                </th>
+                                <th (click)="sortsettings('totalTax')">Tax
+                                </th>
+                                <th (click)="sortsettings('discAmount')">Discount
+                                </th>
+                                <th (click)="sortsettings('billAmount')">Bill Amount
+                                </th>
+                                <th (click)="sortsettings('paidAmount')">Paid Amount
+                                </th>
+                                <th (click)="sortsettings('paidAmount')">
+                                    Customer Details
+                                </th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="select" *ngFor="let item of sortData | filter:term; index as i;"
+                                (click)="itemdetails(item.itemJson, item.chargeJson, item.sourceId, item.invoiceNo, item.orderJson, item.transactionDetails);">
+                                <td class="font-12">
+                                    {{item.invoiceNo}} <br>
+                                    <span class="font-1 font-italic"
+                                        style="color: darkgrey; font-size: 11px;">{{item.itemnames}}</span>
+                                </td>
+                                <td class="font-12">{{item.orderedDate}}</td>
+                                <td class="font-12">{{item.store}}</td>
+                                <td class="font-12">&#8377;{{item.totalTax | number: ".2"}}</td>
+                                <td class="font-12">&#8377;{{item.discAmount | number: ".2"}}</td>
+                                <td class="font-12">&#8377;{{item.billAmount | number: ".2"}}</td>
+                                <td class="font-12">&#8377;{{item.paidAmount | number: ".2"}}</td>
+                                <td class="font-12">
+                                    {{item.cus_details.name}} <br>
+                                    {{item.cus_details.phone}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><strong>TotalSales</strong></td>
+                                <td class="font-14"><strong>&#8377;{{TotalSales | number:".2"}}</strong></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><strong>TotalPayments</strong></td>
+                                <td class="font-14"><strong>&#8377;{{TotalPayments | number:".2"}}</strong></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+<div style="display: none;" id="preloader">
+    <div id="loader"></div>
+</div>
+
+<!-- MODEL -->
+<ng-template #itemsModal let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{receipt.invoiceNo}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modal.dismiss()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <table *ngIf="receipt.items.length" class="table table-sm mb-0" style="width:100%;">
+            <thead>
+                <tr>
+                    <td>Item</td>
+                    <td>Quantity</td>
+                    <td>Tax</td>
+                    <td>Price</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of receipt.items">
+                    <td>{{item.showname || item.Product}}</td>
+                    <td>{{item.Quantity}}</td>
+                    <td>{{item.Tax1+item.Tax2}}</td>
+                    <td>&#8377;{{item.TotalAmount | number:".2"}}</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>Subtotal</td>
+                    <td>&#8377;{{subtotal | number:".2"}}</td>
+                </tr>
+                <tr *ngIf="discount > 0">
+                    <td></td>
+                    <td></td>
+                    <td>Discount</td>
+                    <td>-&#8377;{{discount | number: ".2"}}</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>CGST</td>
+                    <td>&#8377;{{cgst | number:".2"}}</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>SGST</td>
+                    <td>&#8377;{{sgst | number:".2"}}</td>
+                </tr>
+                <tr *ngFor="let item of ordcharges">
+                    <td></td>
+                    <td></td>
+                    <td>{{item.Description}}</td>
+                    <td>&#8377;{{item.ChargeAmount | number:".2"}}</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>Total</td>
+                    <td>&#8377;{{total | number:".2"}}</td>
+                </tr>
+                <tr *ngFor="let transaction of transactionDetails">
+                    <td>₹ {{transaction}}</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+        <div *ngIf="!receipt.items.length" style="background: #fffbe5"
+            class="row px-30 py-30 border border-warning rounded-5 mx-10 bg-primary-10">
+            <span style="
+                margin: auto;
+                color: #6b5d00;
+                font-style: italic;">
+                Item details not available
+            </span>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="modal.dismiss()">Close</button>
+    </div>
+</ng-template>

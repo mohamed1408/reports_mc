@@ -1,0 +1,55 @@
+<div class="cui__utils__heading">
+  <strong>Category Mapping</strong>
+</div>
+
+<div class="card">
+  <div class="row">
+    <div class="col-xs-4 col-md-2">
+      <div class="mb-6 px-3 py-4 ">
+        <nz-select style="width: 200px;" nzShowSearch nzAllowClear nzPlaceHolder="Select Stores" [(ngModel)]="companyid"
+          (ngModelChange)="setprodcat()">
+          <nz-option *ngFor="let row of companies" [nzLabel]="row.Name" [nzValue]="row.CompanyId"></nz-option>
+        </nz-select>
+      </div>
+    </div>
+  </div>
+  <section class="hk-sec-wrapper">
+    <div class="table-wrap" style="margin: 10px;">
+      <div class="table-responsive" style="overflow: auto; height: 600px;">
+        <p *ngIf="changedids.length" style="font-style: italic;" class="text-danger float-left">Total Changed Item(s) {{changedids.length}}</p>
+        <button class="btn btn-success btn-sm float-right mb-2" (click)="savemaps()">Save</button>
+        <table class="table mb-0 table-sm">
+          <thead class="fixed-head">
+            <tr>
+              <th style="text-align: left;" scope="col">Product</th>
+              <th style="text-align: left;" scope="col">Category</th>
+              <th style="text-align: left;" scope="col">########</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let row of prods">
+              <td style="text-align: left;">{{row.Name}} <span *ngIf="row.dirty" class="text-danger">*</span></td>
+              <td style="text-align: left;">{{row.Category}} </td>
+              <td>
+                <nz-select style="width: 200px;" nzShowSearch nzAllowClear nzPlaceHolder="Select Stores"
+                  [(ngModel)]="row.CategoryId" (ngModelChange)="row.dirty = true; refershlist()">
+                  <nz-option *ngFor="let row of categories" [nzLabel]="row.Description" [nzValue]="row.Id"></nz-option>
+                </nz-select>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="d-flex justify-content-between p-2">
+          <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize">
+          </ngb-pagination>
+
+          <select class="custom-select" style="width: auto" [(ngModel)]="pageSize">
+            <option [ngValue]="5">5 items per page</option>
+            <option [ngValue]="10">10 items per page</option>
+            <option [ngValue]="25">25 items per page</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

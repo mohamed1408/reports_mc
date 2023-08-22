@@ -1,0 +1,31 @@
+<div class="topbar">
+  <div class="mr-4">
+    <!-- <cui-topbar-fav-pages></cui-topbar-fav-pages> -->
+    <!-- <cui-topbar-header></cui-topbar-header> -->
+  </div>
+  <div class="mr-auto">
+    <cui-topbar-header></cui-topbar-header>
+    <!-- <cui-topbar-search></cui-topbar-search> -->
+  </div>
+  <div class="mr-4 d-none d-md-block">
+    <!-- <cui-topbar-header></cui-topbar-header> -->
+    <!-- <cui-topbar-issues-history></cui-topbar-issues-history> -->
+  </div>
+  <div class="mb-0 mr-auto d-xl-block d-none">
+    <!-- <cui-topbar-header></cui-topbar-header> -->
+    <!-- <cui-topbar-project-management></cui-topbar-project-management> -->
+  </div>
+  <div class="mr-4 d-none d-sm-block">
+    <!-- <cui-topbar-header></cui-topbar-header> -->
+  </div>
+  <div *ngIf="is_erp_page" class="mr-4 d-none d-sm-block">
+    <!-- <cui-topbar-actions></cui-topbar-actions> -->
+    <select *ngIf="showStoreSelect" class="form-control" [(ngModel)]="storeid" (change)="setstoreid()">
+      <option value="0" selected disabled>Select Store</option>
+      <option value="{{store.id}}" *ngFor="let store of stores">{{store.name}}</option>
+    </select>
+  </div>
+  <div>
+    <cui-topbar-user-menu></cui-topbar-user-menu>
+  </div>
+</div>

@@ -1,0 +1,65 @@
+<div class="cui__utils__heading">
+  <strong>Order Wise Sales</strong>
+</div>
+
+<div class="card">
+  <br>
+  <div class="row">
+    <div class="col-xs-4 col-md-2">
+      <div class="mb-6 px-3 py-4 ">
+        <nz-date-picker [(ngModel)]="date" (ngModelChange)="onChange($event)" style="width: 200px;"></nz-date-picker>
+        <br />
+      </div>
+    </div>
+
+    <div class="col-xs-4 col-md-2">
+      <div class="mb-6 px-3 py-4 ">
+        <nz-select style="width: 200px;" nzShowSearch nzAllowClear nzPlaceHolder="Select Stores" [(ngModel)]="selectedValue">
+          <nz-option *ngFor="let row of getcomstore" [nzLabel]="row.Name" [nzValue]="row.Id"></nz-option>
+        </nz-select>
+        <!-- <nz-select style="width: 200px;" nzShowSearch nzAllowClear nzPlaceHolder="Select Stores"
+          [(ngModel)]="selectedValue">
+          <nz-option *ngFor="let row of getcomstore" [nzLabel]="row.Name" [nzValue]="row.CompanyId"></nz-option>
+        </nz-select> -->
+      </div>
+    </div>
+
+    <div class="col-xs-6 col-md-4">
+      <div class="mb-6 px-3 py-4 ">
+        <button class="btn btn-success" (click)="prdgrpdata_values()">
+          SUBMIT
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <section class="hk-sec-wrapper">
+    <div class="table-wrap" style="margin: 10px;">
+      <div class="table-responsive" style="overflow: auto; height: 600px;">
+        <table class="table mb-0 table-sm">
+
+          <thead class="fixed-head">
+            <tr>
+              <th style="text-align: left;" scope="col">Tax %</th>
+              <th style="text-align: left;" scope="col">Amount</th>
+              <th style="text-align: left;" scope="col">Total %</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let row of report">
+              <td style="text-align: left;">{{row.TaxPercentage}}</td>
+              <td style="text-align: left;">{{row.TotalAmount}} </td>
+              <td style="text-align: left;">{{row.totalpercent}}</td>
+            </tr>
+            <tr>
+              <td style="text-align: right;"><strong>Total</strong></td>
+              <td style="text-align: left;">{{totalamount}}</td>
+            </tr>
+          </tbody>
+
+        </table>
+      </div>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,54 @@
+<div>
+  <div class="card boxContainer" style="background-color: #fefefe; border-radius: 20px;">
+    <div class="text-dark text-center font-size-24 mb-4">
+      <strong style="font-size: 30px; color: #9d6cd9;">Account Locked</strong>
+    </div>
+    <!-- <div class="text-center">
+      <div class="kit__utils__avatar kit__utils__avatar--size64 d-inline-block mb-2">
+        <img src="assets/images/avatars/2.jpg" alt="Mary Stanform" />
+      </div>
+      <div class="font-size-18 text-dark mb-4">
+        <strong>Mary Stanform</strong>
+      </div>
+    </div> -->
+    <!-- <form nz-form [nzLayout]="'vertical'"> -->
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Please input your Password!">
+        <input style="font-size: 18px; align-items: center; background-color: #e8f0fe; border-radius: 10px;"
+          class="form-control" type="password" [(ngModel)]="pin" placeholder="Enter Pin" (keyup.enter)="unlock()" />
+      </nz-form-control>
+    </nz-form-item>
+    <!-- <nz-form-item>
+      <nz-form-control>
+        <button nz-button nzType="primary" [nzSize]="'large'" class="text-center w-100" (click)="unlock()">
+          <strong>Unlock Account</strong>
+        </button>
+      </nz-form-control>
+    </nz-form-item> -->
+    <!-- </form> -->
+    <div class="number-pad">
+      <div nz-col nzSpan="8" (click)="fillPin('1')">1</div>
+      <div nz-col nzSpan="8" (click)="fillPin('2')">2</div>
+      <div nz-col nzSpan="8" (click)="fillPin('3')">3</div>
+      <div nz-col nzSpan="8" (click)="fillPin('4')">4</div>
+      <div nz-col nzSpan="8" (click)="fillPin('5')">5</div>
+      <div nz-col nzSpan="8" (click)="fillPin('6')">6</div>
+      <div nz-col nzSpan="8" (click)="fillPin('7')">7</div>
+      <div nz-col nzSpan="8" (click)="fillPin('8')">8</div>
+      <div nz-col nzSpan="8" (click)="fillPin('9')">9</div>
+      <div nz-col nzSpan="8" (click)="eraseLastClickedValue()"><span nz-icon nzType="close-circle"
+          nzTheme="outline"></span></div>
+      <div nz-col nzSpan="8" (click)="fillPin('0')">0</div>
+      <div nz-col nzSpan="8" (click)="unlock()"><span nz-icon nzType="send" nzTheme="outline"></span></div>
+    </div>
+
+
+    <br>
+    <div class="text-center pt-2 mb-auto">
+      <span class="mr-2">Already have an account?</span>
+      <a routerLink="/auth/login" class="kit__utils__link font-size-16">
+        Sign in
+      </a>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,214 @@
+<div class="card" style="width: 100%;">
+    <div class="card-body">
+        <div nz-row>
+            <div nz-col nzSpan="24" nzSm="12" nzMd="7">
+
+                <p style="font-size: 20px;">Date</p>
+                <nz-select [(ngModel)]="selectedValue" style="width: 55%;" nzPlaceHolder="Select Atleast One"
+                    (ngModelChange)="handleClick($event)">
+                    <nz-option *ngFor="let option of options" [nzValue]="option" [nzLabel]="option"></nz-option>
+                </nz-select>
+
+                <a (click)="storeRpt()" style="margin-left: 10px;" nz-button nzType="link"><span
+                        style="font-size: 20px; color: green;" nz-icon nzType="down-circle"
+                        nzTheme="outline"></span></a>
+
+                <a nz-button nzType="link" (click)="open()"><span style="font-size: 20px;" nz-icon nzType="setting"
+                        nzTheme="outline"></span></a>
+            </div>
+            <div nz-col nzSpan="24" nzSm="12" nzMd="10">
+                <!-- <br><br>
+                <a nz-button nzType="link"><span style="font-size: 20px;" nz-icon nzType="download"
+                        nzTheme="outline"></span></a>
+                <a nz-button nzType="link" (click)="open()"><span style="font-size: 20px;" nz-icon nzType="setting"
+                        nzTheme="outline"></span></a> -->
+                <div style="margin-top: 40px;">
+                    <!-- Add a date picker component for custom range selection -->
+                    <nz-range-picker *ngIf="selectedValue === 'Custom Range'" [(ngModel)]="customRange"
+                        (ngModelChange)="handleCustomRange()">
+                    </nz-range-picker>
+                </div>
+
+
+                <nz-drawer [nzVisible]="drawervisible" nzPlacement="right" [nzTitle]="drawerTitleTemplate"
+                    [nzWidth]="300" (nzOnClose)="drawerclose()">
+                    <ng-template #drawerTitleTemplate>
+                        <div>
+                            <strong style="font-size: larger;">Coloring</strong>
+                        </div>
+                    </ng-template>
+                    <div *ngIf="rangeSetting == null"
+                        style="display: flex; justify-content: center; align-items: center;">
+                        <button nz-button nzType="dashed" (click)="newSetting()">Add Preference</button>
+                    </div>
+                    <div *ngIf="rangeSetting != null">
+                        <p>FROM :</p>
+                        <div class="input-group">
+                            <input type="number" class="form-control" [(ngModel)]="rangeSetting.from"
+                                onfocus="this.select()" (keyup.enter)="addSetting()">
+                        </div>
+                        <br>
+                        <p>TO :</p>
+                        <div class="input-group">
+                            <input type="number" class="form-control" [(ngModel)]="rangeSetting.to"
+                                onfocus="this.select()" (keyup.enter)="addSetting()">
+                        </div>
+                        <br>
+                        <div>
+                            <div>
+                                <p>Pick Color :</p>
+                                <input type="color" [(ngModel)]="rangeSetting.color" (keyup.enter)="addSetting()"
+                                    class="form-control">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div style="margin-top: 30px; margin-left: 40px;" class="col">
+                                <button style="width: 100px; background-color: #31a74d; border-color: #31a74d; "
+                                    type="button" class="btn btn-success" (click)="addSetting()">Add</button>
+
+                            </div>
+                            <div style="margin-top: 30px;" class="col">
+                                <button class="btn text-danger" (click)="rangeSetting = null">
+                                    <span style="font-size: 20px; color: #343a40; " nz-icon nzType="close"
+                                        nzTheme="outline"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div *ngFor="let setting of rangeSettings; let i = index">
+                        <hr />
+                        <div>
+                            <div>
+                                <hr />
+                                <div>
+                                    <p>FROM :</p>
+                                    <div class="input-group">
+                                        <input [disabled]="!setting.editmode" type="number" class="form-control"
+                                            [(ngModel)]="setting.from" onfocus="this.select()"
+                                            (keyup.enter)="updateSettings()" />
+                                    </div>
+                                </div>
+                                <div>
+                                    <p>TO :</p>
+                                    <div class="input-group">
+                                        <input [disabled]="!setting.editmode" type="number" class="form-control"
+                                            [(ngModel)]="setting.to" onfocus="this.select()"
+                                            (keyup.enter)="updateSettings()" />
+                                    </div>
+                                </div>
+                                <div>
+                                    <label>{{ setting.color }} {{lightOrDark(setting.color)}}</label>
+                                    <input [disabled]="!setting.editmode" type="color" class="form-control"
+                                        [(ngModel)]="setting.color" (keyup.enter)="updateSettings()" />
+                                </div>
+                            </div>
+                            <div style="margin-left: 70px; margin-top: 20px;">
+                                <button *ngIf="setting.editmode" (click)="updateSettings()"
+                                    class="btn btn-icon btn-icon-style-1">
+                                    <span style="font-size: 30px; color: blue;" nz-icon nzType="upload"
+                                        nzTheme="outline"></span>
+                                </button>
+                                <button *ngIf="!setting.editmode" (click)="setting.editmode = true"
+                                    class="btn btn-icon btn-icon-style-1">
+                                    <span style="font-size: 30px; color: rgb(184, 184, 82);" nz-icon nzType="edit"
+                                        nzTheme="outline"></span>
+                                </button>
+                                <button (click)="deleteSetting(i)" class="btn btn-icon btn-icon-style-1">
+                                    <span style="font-size: 30px; color: red;" nz-icon nzType="delete"
+                                        nzTheme="outline"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </nz-drawer>
+            </div>
+            <div nz-col nzSpan="24" nzMd="7">
+                <p style="font-size: 20px;">Search</p>
+                <input style="height: 35px; width: 70%;" nz-input placeholder="" [(ngModel)]="term"
+                    (input)="calculate()" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<div nz-row>
+    <div nz-col nzSpan="24" nzMd="17">
+        <div class="card" style="width:98%;">
+            <div class="card-body">
+                <p *ngIf="dateRange.length === 2"><strong>Start &nbsp;: </strong> <span>{{
+                        dateRange[0] | date }}</span> <strong>&nbsp;&nbsp;| End &nbsp;: </strong> <span>{{
+                        dateRange[1]
+                        | date
+                        }}</span></p>
+
+                <section class="hk-sec-wrapper">
+                    <div class="table-wrap">
+                        <div class="table-responsive" style="height: 550px; overflow: auto;">
+                            <table class="table mb-0 table-sm">
+                                <thead class="fixed-head">
+                                    <tr>
+                                        <th scope="col">Store Name</th>
+                                        <th scope="col">Bill Amount</th>
+                                        <th scope="col">Paid Amount</th>
+                                        <th scope="col">POS</th>
+                                        <th scope="col">Swiggy</th>
+                                        <th scope="col">Zomato</th>
+                                        <th scope="col">Discount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="painted-row" *ngFor="let row of storereport | filter: term"
+                                        [style.color]="row.setting.color" [style.background]="row.setting.color">
+                                        <td>{{ row.name }}</td>
+                                        <td>{{ row.billAmount | number: '.2' }}</td>
+                                        <td>{{ row.paidAmount | number: '.2' }}</td>
+                                        <td>
+                                            {{ row.pos | number: '.0-0' }} <br />
+                                            {{ row.paidAmount - row.swiggy - row.zomato | number: '.0' }}
+                                        </td>
+                                        <td>{{ row.swiggy | number: '.0' }}</td>
+                                        <td>{{ row.zomato | number: '.0' }}</td>
+                                        <td>{{ row.discAmount | number: '.0' }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+
+    </div>
+    <div nz-col nzSpan="24" nzMd="7">
+        <div class="card" style="width: 100%;">
+            <div class="card-body">
+                <section class="hk-sec-wrapper sticky" style="top: 220px">
+                    <strong>[Tax]</strong>
+                    <span class="float-right">{{ Tax | number: ".0" }}</span> <br />
+                    <strong>[Disc]</strong>
+                    <span class="float-right">{{ TotalDisc | number: ".0" }}</span> <br />
+                    <strong>[Bill]</strong>
+                    <span class="float-right">{{ TotalBill | number: ".0" }}</span> <br />
+                    <strong>[PaidAmt]</strong>
+                    <span class="float-right">{{ TotalPaidAmt | number: ".0" }}</span>
+                    <br />
+                    <hr />
+                    <strong style="color: #009765;">[POS]</strong>
+                    <span class="float-right">{{ TotalPOS | number: ".0" }}</span> <br />
+                    <strong style="color: #009765;">[SWIGGY]</strong>
+                    <span class="float-right">{{ TotalSWIGGY | number: ".0" }}</span>
+                    <br />
+                    <strong style="color: #009765;">[ZOMATO]</strong>
+                    <span class="float-right">{{ TotalZomato | number: ".0" }}</span>
+                    <br />
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div style="display: none;" id="preloader">
+    <div id="loader"></div>
+</div>

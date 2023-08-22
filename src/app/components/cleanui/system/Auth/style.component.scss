@@ -1,0 +1,53 @@
+@import 'src/app/components/mixins.scss';
+
+//////////////////////////////////////////////////////////////////////////////////////////
+/* LOGIN */
+
+.boxContainer {
+  padding: rem(50) rem(30);
+}
+
+.number-pad {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 280px;
+  margin: 0 auto;
+  font-size: x-large;
+  border: 1px solid #ccc;
+}
+
+.number-pad div {
+  flex-basis: 33.33%;
+  padding: 15px;
+  text-align: center;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.number-pad div:last-child {
+  flex-basis: 66.66%;
+}
+
+.number-pad div {
+  transition: background-color 0.3s ease;
+}
+
+.number-pad div:hover {
+  background-color: lightgray;
+}
+
+.number-pad div.clicked {
+  animation: clickAnimation 0.3s;
+}
+
+@keyframes clickAnimation {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
