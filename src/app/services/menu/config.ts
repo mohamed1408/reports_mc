@@ -127,12 +127,12 @@ export const getMenuData: any[] = [
     icon: 'fe fe-file-text',
     url: '/advanced/ordsalesrpt',
   },
-  {
-    title: 'GST Test',
-    key: 'gsttest',
-    icon: 'fe fe-file-text',
-    url: '/advanced/gsttest',
-  },
+  // {
+  //   title: 'GST Test',
+  //   key: 'gsttest',
+  //   icon: 'fe fe-file-text',
+  //   url: '/advanced/gsttest',
+  // },
   // {
   //   title: 'Category Map',
   //   key: 'cat-map',
