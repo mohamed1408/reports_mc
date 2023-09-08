@@ -70,6 +70,7 @@ export class SaleexportComponent implements OnInit {
     '1999': '36BQSPM9610B1ZO',
     '1967': '29BKEPV9455R1ZS',
     '1979': '33IWIPS2183C1ZF',
+    '4238': '33CDQPS7893Q1Z4',
   }
 
   selectedValue2: string = ''

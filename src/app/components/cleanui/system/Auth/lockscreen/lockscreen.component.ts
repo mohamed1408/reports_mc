@@ -73,7 +73,7 @@ export class LockscreenComponent {
   //     }
   //   })
   // }
-  allowedPins = ['2299', '2810', '1415', '2505', '1404', '1425', '1999', '1967', '1979']
+  allowedPins = ['2299', '2810', '1415', '2505', '1404', '1425', '1999', '1967', '1979', '4238']
   unlock() {
     this.auth.companies.subscribe(companies => {
       if (companies.length > 1) {

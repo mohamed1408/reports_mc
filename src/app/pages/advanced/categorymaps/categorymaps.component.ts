@@ -46,6 +46,8 @@ export class CategorymapsComponent implements OnInit {
       return '29BKEPV9455R1ZS'
     } else if (this.selectGST == '1979') {
       return '33IWIPS2183C1ZF'
+    } else if (this.selectGST == '4238') {
+      return '33CDQPS7893Q1Z4'
     } else {
       return 'ADMIN'
     }
