@@ -132,26 +132,28 @@ export class PrdsalesrptComponent implements OnInit {
     let aoa = [
       [selectedGSTValue],
       [
+        'Id',
         'Product',
         'Amount',
-        'CGst',
+        // 'CGst',
         'CGst Amount',
-        'SGst',
+        // 'SGst',
         'SGst Amount',
-        'Tax',
+        // 'Tax',
         'Tax Amount',
         'Total Amount',
       ],
     ]
     this.prdgrpdata.forEach(js => {
       aoa.push([
+        js['id'],
         js['Product'],
         js['pr'],
-        js['CGST'],
+        // js['CGST'],
         js['CAmt'],
-        js['SGST'],
+        // js['SGST'],
         js['SAmt'],
-        js['CGST'] + js['SGST'],
+        // js['CGST'] + js['SGST'],
         js['CAmt'] + js['SAmt'],
         js['ta'],
       ])

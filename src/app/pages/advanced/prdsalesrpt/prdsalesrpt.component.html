@@ -56,7 +56,10 @@
                 <table class="table mb-0 table-sm">
 
                     <thead class="fixed-head">
+
+                        
                         <tr>
+                            <th style="text-align: left;" scope="col">Id</th>
                             <th style="text-align: left;" scope="col">Product</th>
                             <!-- <th style="text-align: center;" scope="col">Category</th> -->
                             <th style="text-align: center;" scope="col">Amount</th>
@@ -70,6 +73,7 @@
 
                     <tbody>
                         <tr *ngFor="let row of prods">
+                            <td style="text-align: left;">{{row.id}}</td>
                             <td style="text-align: left;">{{row.Product}}</td>
                             <!-- <td style="text-align: center;">{{row.Category}}</td> -->
                             <td style="text-align: center;">{{row.pr}}</td>
