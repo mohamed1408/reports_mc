@@ -5,14 +5,14 @@ import store from 'store'
 
 @Injectable()
 export class jwtAuthService {
-  base_url1 = 'https://localhost:44383/api/'
-  base_url = 'https://biz1mc.azurewebsites.net/api/'
+  base_url1 = 'https://localhost:44356/api/'
+  base_url = 'https://appbiz1retail.azurewebsites.net/api/'
 
   constructor(private http: HttpClient) {}
 
   login(email: string, password: string): Observable<any> {
     console.log('qwertyuioplkjhgfdsa')
-    return this.http.post(this.base_url + 'Home/LoginCheck', { email, password })
+    return this.http.post(this.base_url1 + 'Home/LoginCheck', { email, password })
   }
 
   register(email: string, password: string, name: string): Observable<any> {

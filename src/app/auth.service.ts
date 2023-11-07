@@ -9,7 +9,7 @@ import { BehaviorSubject, throwError } from 'rxjs'
 export class AuthService {
   base_url = 'https://localhost:44356/api/'
   base_url2 = 'https://biz1mc.azurewebsites.net/api/'
-  base_url1 = 'https://biz1retail.azurewebsites.net/api/'
+  base_url1 = 'https://apbiz1retail.azurewebsites.net/api/'
 
   constructor(private http: HttpClient) {}
 
@@ -174,7 +174,7 @@ export class AuthService {
 
   GetRptBiz1Pos(date: string, gstno: string, category: string, tax: string) {
     return this.http.get(
-      this.base_url2 +
+      this.base_url +
         'Home/GetReport?date=' +
         date +
         '&gstno=' +
