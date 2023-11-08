@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "ng": "ng",
-    "start": "set NODE_OPTIONS=--openssl-legacy-provider && ng serve --open",
+    "start": "set NODE_OPTIONS=--openssl-legacy-provider && ng serve --open --host 192.168.1.64 --port 5656",
     "hmr": "ng serve --configuration=hmr --open",
     "build": "ng build",
     "build-demo": "ng build --prod --build-optimizer --configuration=demo",
