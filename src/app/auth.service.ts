@@ -174,7 +174,7 @@ export class AuthService {
 
   GetRptBiz1Pos(date: string, gstno: string, category: string, tax: string) {
     return this.http.get(
-      this.base_url +
+      this.base_url1 +
         'Home/GetReport?date=' +
         date +
         '&gstno=' +

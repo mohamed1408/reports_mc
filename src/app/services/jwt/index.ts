@@ -12,7 +12,7 @@ export class jwtAuthService {
 
   login(email: string, password: string): Observable<any> {
     console.log('qwertyuioplkjhgfdsa')
-    return this.http.post(this.base_url1 + 'Home/LoginCheck', { email, password })
+    return this.http.post(this.base_url + 'Home/LoginCheck', { email, password })
   }
 
   register(email: string, password: string, name: string): Observable<any> {
