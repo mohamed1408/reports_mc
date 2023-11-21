@@ -626,6 +626,7 @@ export class Biz1bookMainComponent implements OnInit {
     let keys = [
       'product',
       'SalesType',
+      'HSNNo',
       'amount',
       'taxpercent',
       'SGST',
@@ -634,13 +635,13 @@ export class Biz1bookMainComponent implements OnInit {
       'CGSTAmt',
       'TaxAmount',
       'TotalAmount',
-      'HSNNo',
     ]
     let aoa = [
       [selectedGSTValue],
       [
         'Product',
         'SalesType',
+        'HSNNo',
         'Amt',
         'Tax %',
         'SGST',
@@ -649,7 +650,6 @@ export class Biz1bookMainComponent implements OnInit {
         'CGST Amt',
         'Tax Amount',
         'Total Amount',
-        'HSNNo',
       ],
     ]
     this.storereport.forEach(js => {
