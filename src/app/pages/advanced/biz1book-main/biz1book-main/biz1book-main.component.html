@@ -1,6 +1,5 @@
 <div class="cui__utils__heading">
     <strong>FB Cakes GST</strong>
-    <h1> Test</h1>
 </div>
 
 <div class="card">
@@ -94,13 +93,13 @@
                         <tr *ngFor="let row of storereport">
                             <td style="text-align: left;">{{ row.product }}</td>
                             <td style="text-align: left;">{{row.amount}}</td>
-                            <td style="text-align: left;">{{row.CGST}}</td>
-                            <td style="text-align: left;">{{row.CGSTAmt }}</td>
-                            <td style="text-align: left;">{{row.SGST}}</td>
-                            <td style="text-align: left;">{{row.SGSTAmt }}</td>
-                            <td style="text-align: left;">{{row.TaxAmount }}</td>
+                            <td style="text-align: left;">{{row.cgst}}</td>
+                            <td style="text-align: left;">{{row.cgstAmt }}</td>
+                            <td style="text-align: left;">{{row.sgst}}</td>
+                            <td style="text-align: left;">{{row.sgstAmt }}</td>
+                            <td style="text-align: left;">{{row.taxAmount }}</td>
                             <td style="text-align: left;">{{row.taxpercent}}</td>
-                            <td style="text-align: left;">{{row.TotalAmount }}</td>
+                            <td style="text-align: left;">{{row.totalAmount }}</td>
                         </tr>
                         <tr *ngIf="!storereport || storereport.length == 0">
                           <td colspan="100%" class="text-center">No Records Found</td>

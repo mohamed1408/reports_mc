@@ -623,18 +623,19 @@ export class Biz1bookMainComponent implements OnInit {
 
   exportToCSV() {
     const selectedGSTValue = this.gstMapping[this.selectGST]
+    console.log(selectedGSTValue)
     let keys = [
       'product',
       'SalesType',
       'HSNNo',
       'amount',
       'taxpercent',
-      'SGST',
-      'CGST',
-      'SGSTAmt',
-      'CGSTAmt',
-      'TaxAmount',
-      'TotalAmount',
+      'sgst',
+      'cgst',
+      'sgstAmt',
+      'cgstAmt',
+      'taxAmount',
+      'totalAmount',
     ]
     let aoa = [
       [selectedGSTValue],
