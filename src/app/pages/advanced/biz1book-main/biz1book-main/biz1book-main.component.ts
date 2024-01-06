@@ -626,8 +626,8 @@ export class Biz1bookMainComponent implements OnInit {
     console.log(selectedGSTValue)
     let keys = [
       'product',
-      'SalesType',
-      'HSNNo',
+      'salesType',
+      'hsnNo',
       'amount',
       'taxpercent',
       'sgst',
