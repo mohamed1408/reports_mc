@@ -1,0 +1,81 @@
+<div class="cui__utils__heading">
+    <strong> Bill Wise GST Report</strong>
+</div>
+
+<div class="card">
+    <br>
+    <div class="row">
+        <div class="col-3" style="text-align: center;">
+            <nz-month-picker style="width: 200px" [(ngModel)]="selectedMonth"
+                (ngModelChange)="onChange()"></nz-month-picker>
+        </div>
+
+        <div class="col-3">
+            <nz-select style="width: 200px;" nzShowSearch nzAllowClear nzPlaceHolder="Select GST No"
+                [(ngModel)]="gstno">
+                <nz-option nzLabel="33APUPK5773P1ZW" nzValue="33APUPK5773P1ZW"></nz-option>
+                <nz-option nzLabel="33AODPM8622B1ZC" nzValue="33AODPM8622B1ZC"></nz-option>
+                <nz-option nzLabel="33CZXPM4328M1ZM" nzValue="33CZXPM4328M1ZM"></nz-option>
+                <nz-option nzLabel="33AMBPD3114B2Z5" nzValue="33AMBPD3114B2Z5"></nz-option>
+                <nz-option nzLabel="33AAECF5895R1ZS" nzValue="33AAECF5895R1ZS"></nz-option>
+                <nz-option nzLabel="33ETSPM1889J1ZV" nzValue="33ETSPM1889J1ZV"></nz-option>
+                <nz-option nzLabel="36BQSPM9610B1ZO" nzValue="36BQSPM9610B1ZO"></nz-option>
+                <nz-option nzLabel="29BKEPV9455R1ZS" nzValue="29BKEPV9455R1ZS"></nz-option>
+                <nz-option nzLabel="33IWIPS2183C1ZF" nzValue="33IWIPS2183C1ZF"></nz-option>
+            </nz-select>
+        </div>
+
+        <div class="col">
+            <button class="btn btn-success" (click)="getbillwiserpt()">
+                SUBMIT
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="btn btn-danger" (click)="ExportTOExcel()">
+                EXPORT
+            </button>
+        </div>
+    </div>
+    <!-- <div class="selected-month">
+        <p *ngIf="!dataLoaded">
+            Data for {{ date | date: 'MMMM yyyy' }} completed
+        </p>
+    </div> -->
+
+    <section class="hk-sec-wrapper">
+        <div class="table-wrap" style="margin: 10px;">
+            <div class="table-responsive" style="overflow: auto; height: 600px;">
+                <table class="table mb-0 table-sm" #TABLE>
+                    <thead class="fixed-head">
+                        <tr>
+                            <th scope="col" style="text-align: left;">GstNoOld</th>
+                            <th style="text-align: left;" scope="col">Name</th>
+                            <th scope="col" style="text-align: left;">Store Name</th>
+                            <th scope="col" style="text-align: left;">Tax1</th>
+                            <th scope="col" style="text-align: left;">Tax2 </th>
+                            <th scope="col" style="text-align: left;">Invoice</th>
+                            <th scope="col" style="text-align: left;">Ordered Date</th>
+                            <th scope="col" style="text-align: left;">Price</th>
+                            <th scope="col" style="text-align: left;">Quantity</th>
+                            <th scope="col" style="text-align: left;">Total Amount</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr *ngFor="let data of reportsvalue">
+                            <td>{{data.GstNoOld}}</td>
+                            <td>{{data.Name}}</td>
+                            <td>{{data.StoreName}}</td>
+                            <td>{{data.Tax1}}</td>
+                            <td>{{data.Tax2}}</td>
+                            <td>{{data.ino}}</td>
+                            <td>{{data.od | date: 'dd/MM/yyyy'}}</td>
+                            <td>{{data.pr}}</td>
+                            <td>{{data.qy}}</td>
+                            <td>{{data.ta}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+</div>

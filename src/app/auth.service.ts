@@ -11,6 +11,7 @@ export class AuthService {
   base_url2 = 'https://biz1mc.azurewebsites.net/api/'
   base_url1 = 'https://apbiz1retail.azurewebsites.net/api/'
   base_url3 = 'https://retailpos.azurewebsites.net/api/'
+  base_url4 = 'https://biz1ps.azurewebsites.net/api/'
 
   constructor(private http: HttpClient) {}
 
@@ -269,6 +270,11 @@ export class AuthService {
     return this.http.post(this.base_url2 + 'Home/SaveCatMaps', map)
   }
 
+  getbillwiserpt(gstno, from, to) {
+    return this.http.get(
+      this.base_url4 + 'Report/GetBillWise?gstno=' + gstno + '&from=' + from + '&to=' + to,
+    )
+  }
   // getSaleProducts(companyid: number) {
   //   return this.http.get(this.base_url + 'Sale/GetSaleProducts?companyid=' + companyid)
   // }

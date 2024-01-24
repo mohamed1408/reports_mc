@@ -33,6 +33,7 @@ import { ProductwisereportComponent } from './productwisereport/productwiserepor
 import { SaleexportComponent } from './saleexport/saleexport.component'
 import { MapcatComponent } from './mapcat/mapcat.component'
 import { WebordersComponent } from './weborders/weborders.component'
+import { BillwisegstreportComponent } from './billwisegstreport/billwisegstreport.component'
 
 const COMPONENTS = [
   OrderwisereportsComponent,
@@ -69,6 +70,6 @@ const COMPONENTS = [
     NestableModule,
     Ng2SearchPipeModule,
   ],
-  declarations: [...COMPONENTS, SaleexportComponent, MapcatComponent],
+  declarations: [...COMPONENTS, SaleexportComponent, MapcatComponent, BillwisegstreportComponent],
 })
 export class AppsModule {}

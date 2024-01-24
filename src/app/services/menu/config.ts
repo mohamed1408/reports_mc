@@ -169,6 +169,12 @@ export const getMenuData: any[] = [
     icon: 'fe fe-file-text',
     url: '/advanced/stafftraining',
   },
+  {
+    title: 'Bill Wise GST Report',
+    key: 'appsOrder Wise',
+    icon: 'fe fe-file-text',
+    url: '/apps/billwiserpt',
+  },
   // {
   //   title: 'Web Orders',
   //   key: 'appsweborder',

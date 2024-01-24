@@ -25,6 +25,7 @@ import { OrderwisereportsComponent } from './orderwisereports/orderwisereports.c
 import { ProductwisereportComponent } from './productwisereport/productwisereport.component'
 import { SaleexportComponent } from './saleexport/saleexport.component'
 import { WebordersComponent } from './weborders/weborders.component'
+import { BillwisegstreportComponent } from './billwisegstreport/billwisegstreport.component'
 
 const routes: Routes = [
   {
@@ -131,6 +132,11 @@ const routes: Routes = [
     path: 'saleexport',
     component: SaleexportComponent,
     data: { title: 'saleexport App' },
+  },
+  {
+    path: 'billwiserpt',
+    component: BillwisegstreportComponent,
+    data: { title: 'billwiserpt App' },
   },
   {
     path: 'weborder',
