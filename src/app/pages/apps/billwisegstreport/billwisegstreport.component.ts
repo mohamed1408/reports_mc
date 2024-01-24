@@ -10,20 +10,40 @@ import * as moment from 'moment'
   styleUrls: ['./billwisegstreport.component.scss'],
 })
 export class BillwisegstreportComponent implements OnInit {
-  constructor(private Auth: AuthService) {}
+  constructor(private Auth: AuthService) {
+    var pincode = JSON.parse(localStorage.getItem('lockscreenPin'))
+    this.selectGST = pincode
+  }
 
   ngOnInit(): void {}
 
+  gstMapping = {
+    '2299': '33APUPK5773P1ZW',
+    '2810': '33AODPM8622B1ZC',
+    '1415': '33CZXPM4328M1ZM',
+    '2505': '33AMBPD3114B2Z5',
+    '1404': '33AAECF5895R1ZS',
+    '1425': '33ETSPM1889J1ZV',
+    '6521': '',
+    '1999': '36BQSPM9610B1ZO',
+    '1967': '29BKEPV9455R1ZS',
+    '1979': '33IWIPS2183C1ZF',
+    '4238': '33CDQPS7893Q1Z4',
+  }
+
+  selectGST: any
   gstno: string
   fromdate: any
   todate: any
   reportsvalue: any
 
   getbillwiserpt() {
-    this.Auth.getbillwiserpt(this.gstno, this.fromdate, this.todate).subscribe((data: any) => {
-      this.reportsvalue = data['report']
-      console.log(data)
-    })
+    this.Auth.getbillwiserpt(this.gstMapping[this.selectGST], this.fromdate, this.todate).subscribe(
+      (data: any) => {
+        this.reportsvalue = data['report']
+        console.log(data)
+      },
+    )
   }
 
   selectedMonth: Date
