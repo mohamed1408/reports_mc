@@ -82,10 +82,12 @@ export class BillwisegstreportComponent implements OnInit {
 
   ExportTOExcel() {
     console.log('clicked')
+    const gstno = this.gstMapping[this.selectGST]
+    const datesa = moment(this.fromdate).format('MMM YYYY')
     const today: string = moment().format('YYYY-MM-DD')
     const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(this.TABLE.nativeElement)
     const wb: XLSX.WorkBook = XLSX.utils.book_new()
     XLSX.utils.book_append_sheet(wb, ws, 'Sheet1')
-    XLSX.writeFile(wb, `${today} billwiserpt.xlsx`)
+    XLSX.writeFile(wb, `${gstno} - ${datesa} - billwiserpt.xlsx`)
   }
 }
